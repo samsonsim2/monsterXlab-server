@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 import connectDB from './db/connect.js'
 const app = express()
-
+import cors from 'cors'
 import imageRouter from './routes/imageRoutes.js'
 import fileUpload from 'express-fileupload'
 import { v2 as cloudinary } from 'cloudinary'
@@ -13,6 +13,7 @@ cloudinary.config({
   api_secret: process.env.CLOUD_API_SECRET,
 })
 //middleware
+app.use(cors())
 app.use(express.json())
 app.use(fileUpload({ useTempFiles: true }))
 
