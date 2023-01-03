@@ -16,7 +16,7 @@ cloudinary.config({
 app.use(express.json())
 app.use(fileUpload({ useTempFiles: true }))
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('welcome!')
 })
 app.use('/api/v1/images', imageRouter)
