@@ -36,26 +36,26 @@ app.use((req, res, next) => {
 })
 // ------- end of pre flight cors
 
-const whitelist = [
-  'http://localhost:3000',
-  'https://monster-xlab-server.vercel.app',
-]
+// const whitelist = [
+//   'http://localhost:3000',
+//   'https://monster-xlab-server.vercel.app',
+// ]
 
-// ✅ Enable pre-flight requests
-app.options('*', cors())
+// // ✅ Enable pre-flight requests
+// app.options('*', cors())
 
-const corsOptions = {
-  credentials: true,
-  origin: (origin, callback) => {
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  },
-}
+// const corsOptions = {
+//   credentials: true,
+//   origin: (origin, callback) => {
+//     if (whitelist.indexOf(origin) !== -1 || !origin) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   },
+// }
 
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
 
 app.get('/api', (req, res) => {
   res.send('welcome!')
