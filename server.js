@@ -38,7 +38,7 @@ app.use((req, res, next) => {
 
 const whitelist = [
   'http://localhost:3000',
-  'http://https://monster-xlab-server.vercel.app',
+  'https://monster-xlab-server.vercel.app',
 ]
 
 // ✅ Enable pre-flight requests
