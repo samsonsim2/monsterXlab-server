@@ -16,7 +16,13 @@ cloudinary.config({
 app.use(cors())
 app.use(express.json())
 app.use(fileUpload({ useTempFiles: true }))
-
+app.use((req, res, next) => {
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET')
+    return res.status(200).json({})
+  }
+  next()
+})
 app.get('/api', (req, res) => {
   res.send('welcome!')
 })
