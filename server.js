@@ -16,6 +16,8 @@ cloudinary.config({
 app.use(cors())
 app.use(express.json())
 app.use(fileUpload({ useTempFiles: true }))
+
+// pre flight cors
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT')
@@ -32,6 +34,28 @@ app.use((req, res, next) => {
   }
   next()
 })
+// ------- end of pre flight cors
+
+const whitelist = [
+  'http://localhost:3000',
+  'http://https://monster-xlab-server.vercel.app',
+]
+
+// ✅ Enable pre-flight requests
+app.options('*', cors())
+
+const corsOptions = {
+  credentials: true,
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+}
+
+app.use(cors(corsOptions))
 app.get('/api', (req, res) => {
   res.send('welcome!')
 })
